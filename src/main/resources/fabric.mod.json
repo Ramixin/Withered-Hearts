@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "witherhearts",
+  "version": "${version}",
+  "name": "WitherHearts",
+  "description": "A mod that only renders the withering hearts if they will wither away",
+  "authors": [
+    "Ramixin"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/witherhearts/icon.png",
+  "environment": "client",
+  "accesswidener": "witherhearts.accesswidener",
+  "entrypoints": {
+    "client": [
+      "net.ramixin.witherhearts.client.WitherHeartsClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "witherhearts.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=1.21.2"
+  }
+}
