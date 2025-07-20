@@ -4,9 +4,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,19 +34,23 @@ public class InGameHudMixin {
         InGameHud.HeartType changedType;
         int left = witheredHeartCount.get();
         boolean renderHalf = false;
-        if(type == InGameHud.HeartType.CONTAINER) changedType = type;
-        else if(left == 1) {
+        if(left <= 0) changedType = type;
+        else if(type == InGameHud.HeartType.CONTAINER) changedType = type;
+        else if (half) {
+            changedType = InGameHud.HeartType.WITHERED;
+            witheredHeartCount.set(left - 1);
+        }
+        else if(left > 1) {
+            changedType = InGameHud.HeartType.WITHERED;
+            witheredHeartCount.set(left - 2);
+        }
+        else {
             changedType = type;
             renderHalf = true;
             witheredHeartCount.set(0);
         }
-        else if(left <= 0) changedType = type;
-        else {
-            changedType = InGameHud.HeartType.WITHERED;
-            witheredHeartCount.set(left - (half ? 1 : 2));
-        }
         original.call(instance, context, changedType, x, y, hardcore, blinking, half);
-        if(renderHalf) context.drawGuiTexture(RenderLayer::getGuiTextured, WitherHeartsClient.generatedId(InGameHud.HeartType.WITHERED.getTexture(hardcore, true, blinking).getPath()), x, y, 9, 9);
+        if(renderHalf) context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, WitherHeartsClient.generatedId(InGameHud.HeartType.WITHERED.getTexture(hardcore, true, blinking).getPath()), x, y, 9, 9);
     }
 
 }
