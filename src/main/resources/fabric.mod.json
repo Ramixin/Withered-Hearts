@@ -11,7 +11,7 @@
   "license": "MIT",
   "icon": "assets/witherhearts/icon.png",
   "environment": "client",
-  "accesswidener": "witherhearts.accesswidener",
+  "accessWidener": "witherhearts.accesswidener",
   "entrypoints": {
     "client": [
       "net.ramixin.witherhearts.client.WitherHeartsClient"
@@ -25,7 +25,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=1.21.2"
   }
 }
