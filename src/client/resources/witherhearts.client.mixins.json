@@ -4,7 +4,7 @@
   "package": "net.ramixin.witherhearts.client.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "InGameHudMixin"
+    "GuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1

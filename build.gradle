@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
 }
 
@@ -36,12 +36,11 @@ repositories {
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    include (modImplementation ("com.github.ramixin:mixson-fabric:v${project.mixson_version}") {
-        exclude group:"net.fabricmc.fabric-api", module: "fabric-api"
-    })
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
 }
 
 processResources {
@@ -53,6 +52,7 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
+                "fabric_api_version": project.fabric_api_version,
                 "loader_version": project.loader_version
     }
 }
