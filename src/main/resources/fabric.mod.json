@@ -12,11 +12,6 @@
   "icon": "assets/witherhearts/icon.png",
   "environment": "client",
   "accessWidener": "witherhearts.accesswidener",
-  "entrypoints": {
-    "client": [
-      "net.ramixin.witherhearts.client.WitherHeartsClient"
-    ]
-  },
   "mixins": [
     {
       "config": "witherhearts.client.mixins.json",
@@ -26,6 +21,6 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": ">=${fabric_api_version}",
-    "minecraft": ">=1.21.11"
+    "minecraft": ">=26.1"
   }
 }
