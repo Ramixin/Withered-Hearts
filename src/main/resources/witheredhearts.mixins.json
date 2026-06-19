@@ -10,6 +10,6 @@
   },
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "client.GuiMixin"
+    "client.HudMixin"
   ]
 }
