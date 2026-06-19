@@ -16,12 +16,6 @@
 
 </div>
 
-# Does this support resource packs?
-
----
-Yes! Long story short, Withered Hearts uses the library Mixson to automatically generate textures so that it can match
-any texture from any resource pack.
-
 ## License
 
 ---

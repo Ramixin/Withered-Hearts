@@ -1,4 +1,4 @@
-package net.ramixin.witherhearts.client.mixins;
+package net.ramixin.witheredhearts.mixins.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -35,7 +35,7 @@ public class GuiMixin {
     }
 
     @WrapOperation(method = "extractHearts", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;extractHeart(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"))
-    private void preventWitherHeartIfRemaining(Gui instance, GuiGraphicsExtractor guiGraphics, Gui.HeartType type, int x, int y, boolean hardcore, boolean blinking, boolean half, Operation<Void> original, @Share("witheredHeartCount") LocalIntRef witheredHeartCount) {
+    private void preventWitherHeartIfRemaining(Gui instance, GuiGraphicsExtractor graphics, Gui.HeartType type, int x, int y, boolean isHardcore, boolean blinks, boolean half, Operation<Void> original, @Share("witheredHeartCount") LocalIntRef witheredHeartCount) {
         Gui.HeartType changedType;
         int left = witheredHeartCount.get();
         boolean renderHalf = false;
@@ -54,8 +54,8 @@ public class GuiMixin {
             renderHalf = true;
             witheredHeartCount.set(0);
         }
-        original.call(instance, guiGraphics, changedType, x, y, hardcore, blinking, half);
-        if(renderHalf) guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, generatedId(Gui.HeartType.WITHERED.getSprite(hardcore, true, blinking).getPath()), x, y, 9, 9);
+        original.call(instance, graphics, changedType, x, y, isHardcore, blinks, half);
+        if(renderHalf) graphics.blitSprite(RenderPipelines.GUI_TEXTURED, generatedId(Gui.HeartType.WITHERED.getSprite(isHardcore, true, blinks).getPath()), x, y, 9, 9);
     }
 
     @Unique
